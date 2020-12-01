@@ -19,10 +19,7 @@ public class MemberDAO {
 			System.out.println("연결실패");
 		}
 	}
-	
-	// delete 추가해 주세요.
-	// insert 추가해 주세요.
-	// select 추가해 주세요.
+
 	public void NoBirthInsertCommand(MemberDTO dto) {
 		Connection conn = null;
 
@@ -111,6 +108,49 @@ public class MemberDAO {
 		}
 
 	}
+		
+	public void update(MemberDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt =null;
+		String sql="update member_P set member_id=?, member_pw=?, member_name=?, member_birth=?, member_email=? where member_num=?";
+		
+		try {
+			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getMember_id());
+			pstmt.setString(2, dto.getMember_pw());
+			pstmt.setString(3, dto.getMember_name());
+			pstmt.setString(4, dto.getMember_birth());
+			pstmt.setString(5, dto.getMember_email());
+			pstmt.setInt(6, dto.getMember_num());
+			pstmt.executeUpdate();
+			
+						
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeAll(null, pstmt, conn);
+		}
+	}
+	public void delete(MemberDTO dto) {
+		Connection conn =null;
+		PreparedStatement pstmt=null;
+		String sql = "delete from member_P where member_num=?";
+		try {
+			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getMember_num());
+			pstmt.executeUpdate();
+			
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeAll(null, pstmt, conn);
+		}
+		
+	}
 	
 	public List<MemberDTO> select() {
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
@@ -137,7 +177,6 @@ public class MemberDAO {
 				
 			}
 			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -145,32 +184,6 @@ public class MemberDAO {
 		}
 		
 		return list;
-	}
-	
-	
-	public void update(MemberDTO dto) {
-		Connection conn = null;
-		PreparedStatement pstmt =null;
-		String sql="update member_P set member_id=?, member_pw=?, member_name=?, member_birth=?, member_email=? where member_num=?";
-		
-		try {
-			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, dto.getMember_id());
-			pstmt.setString(2, dto.getMember_pw());
-			pstmt.setString(3, dto.getMember_name());
-			pstmt.setString(4, dto.getMember_birth());
-			pstmt.setString(5, dto.getMember_email());
-			pstmt.setInt(6, dto.getMember_num());
-			pstmt.executeUpdate();
-			
-						
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			closeAll(null, pstmt, conn);
-		}
 	}
 	
 	public List<MemberDTO> selectBybirth(int age) {
@@ -240,7 +253,7 @@ public class MemberDAO {
 			
 			return dto;
 		}
-	
+		
 	public List<MemberDTO> selectByName(String name) {
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
 		Connection conn = null;
@@ -362,60 +375,5 @@ public class MemberDAO {
 		}
 		
 	}
-	public void deleteByNum(MemberDTO dto) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = "delete from member_p where member_num = ?";
-		try {
-			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getMember_num());
-			pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			closeAll(null, pstmt, conn);
-		}
-
-	}
-	public void deleteByEmail(MemberDTO dto) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		String sql = "delete from member_p where member_email = ?";
-		try {
-			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getMember_email());
-			pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			closeAll(null, pstmt, conn);
-		}
-
-	}
-	
-	public void delete(MemberDTO dto) {
-		Connection conn =null;
-		PreparedStatement pstmt=null;
-		String sql = "delete from member_P where member_num=?";
-		try {
-			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, dto.getMember_num());
-			pstmt.executeUpdate();
-			
-		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			closeAll(null, pstmt, conn);
-		}
-		
-	}
-		
-
 
 }
