@@ -23,9 +23,93 @@ public class MemberDAO {
 	// delete 추가해 주세요.
 	// insert 추가해 주세요.
 	// select 추가해 주세요.
-	
+	public void NoBirthInsertCommand(MemberDTO dto) {
+		Connection conn = null;
+
+		PreparedStatement pstmt = null;
+		String sql = "insert into member_p(member_num, member_id, member_pw, member_name, member_email)values(num.nextval,?,?,?,?)";
+		boolean isOk = false;
+
+		try {
+			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, dto.getMember_id());
+
+			pstmt.setString(2, dto.getMember_pw());
+
+			pstmt.setString(3, dto.getMember_name());
+
+			pstmt.setString(4, dto.getMember_email());
+
+			pstmt.executeUpdate();
+			isOk = true;
+
+		} catch (Exception e) {
+			{
+				e.printStackTrace();
+			}
+
+		} finally {
+			try {
+				if (isOk) {
+					conn.commit();
+				} else {
+					conn.rollback();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
+	}
 	public void insert(MemberDTO dto) {
-		
+		Connection conn = null;
+
+		PreparedStatement pstmt = null;
+		String sql = "insert into member_P values(num.nextval,?,?,?,?,?)";
+		boolean isOk = false;
+
+		try {
+			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, dto.getMember_id());
+
+			pstmt.setString(2, dto.getMember_pw());
+
+			pstmt.setString(3, dto.getMember_name());
+
+			pstmt.setString(4, dto.getMember_birth());
+
+			pstmt.setString(5, dto.getMember_email());
+
+			pstmt.executeUpdate();
+			isOk = true;
+
+		} catch (Exception e) {
+			{
+				e.printStackTrace();
+			}
+
+		} finally {
+			try {
+				if (isOk) {
+					conn.commit();
+				} else {
+					conn.rollback();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+
 	}
 	
 	public List<MemberDTO> select() {
@@ -63,9 +147,6 @@ public class MemberDAO {
 		return list;
 	}
 	
-	public void delete() {
-		
-	}
 	
 	public void update(MemberDTO dto) {
 		Connection conn = null;
@@ -281,5 +362,60 @@ public class MemberDAO {
 		}
 		
 	}
+	public void deleteByNum(MemberDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from member_p where member_num = ?";
+		try {
+			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getMember_num());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(null, pstmt, conn);
+		}
+
+	}
+	public void deleteByEmail(MemberDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from member_p where member_email = ?";
+		try {
+			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getMember_email());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(null, pstmt, conn);
+		}
+
+	}
+	
+	public void delete(MemberDTO dto) {
+		Connection conn =null;
+		PreparedStatement pstmt=null;
+		String sql = "delete from member_P where member_num=?";
+		try {
+			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getMember_num());
+			pstmt.executeUpdate();
+			
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeAll(null, pstmt, conn);
+		}
+		
+	}
+		
+
 
 }

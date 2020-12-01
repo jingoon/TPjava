@@ -29,9 +29,10 @@ public class Main {
 				System.out.print(coms.get(i));
 			}
 			try {
+				System.out.println();
 				int index=sc.nextInt();
 				sc.nextLine();
-				System.out.println();
+				
 				coms.get(index).execute(sc);
 			} catch (Exception e) {
 				System.out.println("0~4 중 하나를 선택하세요.");
