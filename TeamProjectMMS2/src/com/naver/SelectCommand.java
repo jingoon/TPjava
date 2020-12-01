@@ -56,7 +56,7 @@ public class SelectCommand implements Command{
 				System.out.println("존재하지 않는 회원이름입니다");
 			}
 			break;
-		default:
+		case 5:
 			System.out.println("회원의 나이를 입력하세요");
 		
 			int member_age= sc.nextInt();

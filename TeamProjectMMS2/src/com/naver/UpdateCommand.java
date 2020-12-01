@@ -73,7 +73,6 @@ public class UpdateCommand implements Command{
 		return dto;
 	}
 	
-	
 	public String member_name(Scanner sc) {
 		String member_name="";
 		System.out.println("회원번호: "+dto.getMember_num()+" 의 이름을 변경하시겠습니까?( Y , N )");
@@ -112,22 +111,9 @@ public class UpdateCommand implements Command{
 		}
 		return member_email;
 	}
-	
-
-	
-
-		
-		
-
-
 	@Override
 	public String toString() {
 		return "3.수정 ";
 	}
-	
-	
-	
-	
-	
 
 }
