@@ -11,7 +11,7 @@ import com.naver.UpdateCommand;
 import com.naver.InsertCommand;
 import com.naver.SelectCommand;
 
-public class Main {
+public class Main {//¡÷ºÆ
 	public static void main(String[] args) {
 			
 		Scanner sc = new Scanner(System.in);
