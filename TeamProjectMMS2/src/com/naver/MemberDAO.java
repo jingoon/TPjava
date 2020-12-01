@@ -25,12 +25,10 @@ public class MemberDAO {
 
 		PreparedStatement pstmt = null;
 		String sql = "insert into member_p(member_num, member_id, member_pw, member_name, member_email)values(num.nextval,?,?,?,?)";
-		boolean isOk = false;
 
 		try {
 			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
 
-			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, dto.getMember_id());
@@ -42,7 +40,6 @@ public class MemberDAO {
 			pstmt.setString(4, dto.getMember_email());
 
 			pstmt.executeUpdate();
-			isOk = true;
 
 		} catch (Exception e) {
 			{
@@ -51,12 +48,9 @@ public class MemberDAO {
 
 		} finally {
 			try {
-				if (isOk) {
-					conn.commit();
-				} else {
-					conn.rollback();
-				}
-			} catch (SQLException e) {
+				closeAll(null, pstmt, conn);
+		
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -68,12 +62,10 @@ public class MemberDAO {
 
 		PreparedStatement pstmt = null;
 		String sql = "insert into member_P values(num.nextval,?,?,?,?,?)";
-		boolean isOk = false;
 
 		try {
 			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
 
-			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, dto.getMember_id());
@@ -83,11 +75,11 @@ public class MemberDAO {
 			pstmt.setString(3, dto.getMember_name());
 
 			pstmt.setString(4, dto.getMember_birth());
+			
 
 			pstmt.setString(5, dto.getMember_email());
 
 			pstmt.executeUpdate();
-			isOk = true;
 
 		} catch (Exception e) {
 			{
@@ -96,12 +88,8 @@ public class MemberDAO {
 
 		} finally {
 			try {
-				if (isOk) {
-					conn.commit();
-				} else {
-					conn.rollback();
-				}
-			} catch (SQLException e) {
+				closeAll(null, pstmt, conn);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
