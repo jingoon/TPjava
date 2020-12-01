@@ -1,5 +1,6 @@
 package com.naver;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class DeleteCommand implements Command{
@@ -7,7 +8,8 @@ public class DeleteCommand implements Command{
 	@Override
 	public void execute(Scanner sc) {
 		MemberDAO dao = new MemberDAO();
-		System.out.println("1.아이디로 삭제, 2.회원번호로 삭제");
+		MemberDTO dto = null;
+		System.out.println("1.아이디로 삭제, 2.회원번호로 삭제, 3.이름으로 삭제");
 		int menu = sc.nextInt();
 		sc.nextLine();
 		switch (menu) {
@@ -23,8 +25,32 @@ public class DeleteCommand implements Command{
 			sc.nextLine();
 			dao.delete(dao.selectByNum(member_num));
 			break;
-		// 이름을 입력해서 삭제(중복이라면 같은 이름 리스트 보여준 후 회원번호로 삭제)
-		
+		case 3:
+			System.out.println("이름을 입력해주세요");
+			String member_name=sc.nextLine();
+			List<MemberDTO>list=dao.selectByName(member_name);
+			if(list.size()==0) {
+				System.out.println("없는 회원입니다");
+			}else if(list.size()==1) {
+				dto=list.get(0);
+				dao.delete(dto);
+				System.out.println("회원"+member_name+"가 삭제되었습니다.");
+			}else {
+				System.out.println(list.size() + "명의 중복된 회원이 존재합니다.");
+				System.out.println("모두 삭제 하시겠습니까?(Y, N)");
+				String y = sc.nextLine();
+				if (y.equalsIgnoreCase("y")) {
+					for (int i = 0; i < list.size(); i++) {
+						dto = list.get(i);
+						dao.delete(dto);
+					}
+					System.out.println("회원" + member_name + "가 " + list.size() + "명 삭제되었습니다.");
+				} else {
+					System.out.println("삭제가 취소 되었습니다.");
+				} 
+			}
+			break;
+				
 		}
 
 	}

@@ -50,6 +50,7 @@ public class InsertCommand implements Command{
 			break;
 		}
 		
+		
 			
 	}
 	@Override

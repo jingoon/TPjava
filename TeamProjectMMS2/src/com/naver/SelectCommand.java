@@ -62,8 +62,8 @@ public class SelectCommand implements Command{
 			int member_age= sc.nextInt();
 			sc.nextLine();
 			list=dao.selectBybirth(member_age);
-			if(list==null) {
-				System.out.println("존재하지 않는 회원입니다");
+			if(list.size()==0) {
+				System.out.println("회원 중 "+member_age+"세 회원은 없습니다");
 				break;
 			}
 			print(list);
