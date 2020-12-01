@@ -160,23 +160,24 @@ public class MemberDAO {
 			return dto;
 		}
 	
-	public List<MemberDTO> selectByName(String member_name) {
+	public List<MemberDTO> selectByName(String name) {
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs=null;
-		String sql="select * from member_P where member_name=?";
+		String sql="select * from member_P where member_name like ?";
 		MemberDTO dto =null;
 		try {
 			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member_name);
+			pstmt.setString(1, "%"+name+"%");
 			
 			rs=pstmt.executeQuery();
 			while (rs.next()) {
 				int member_num=rs.getInt("member_num");
 				String member_id=rs.getString("member_id");
 				String member_pw=rs.getString("member_pw");
+				String member_name=rs.getString("member_name");
 				String member_birth=rs.getString("member_birth");
 				String member_email=rs.getString("member_email");
 				
@@ -199,11 +200,44 @@ public class MemberDAO {
 	}
 
 	
-	public MemberDTO selectByid(String member_id) {
+	public List<MemberDTO> selectByid(String id) {
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs=null;
-		String sql="select * from member_P where member_id=?";
+		String sql="select * from member_P where member_id like ?";
+		MemberDTO dto =null;
+		try {
+			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+id+"%");
+			
+			rs=pstmt.executeQuery();
+			while (rs.next()) {
+				int member_num=rs.getInt("member_num");
+				String member_id=rs.getString("member_id");
+				String member_pw=rs.getString("member_pw");
+				String member_name=rs.getString("member_name");
+				String member_birth=rs.getString("member_birth");
+				String member_email=rs.getString("member_email");
+				
+				dto = new MemberDTO(member_num, member_id, member_pw, member_name, member_birth, member_email);
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeAll(rs, pstmt, conn);
+		}
+		
+		return list;
+	}
+	public MemberDTO selectByEquelId(String member_id) {
+		Connection conn = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs=null;
+		String sql="select * from member_P where member_id = ?";
 		MemberDTO dto =null;
 		try {
 			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
@@ -211,7 +245,7 @@ public class MemberDAO {
 			pstmt.setString(1, member_id);
 			
 			rs=pstmt.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				int member_num=rs.getInt("member_num");
 				String member_pw=rs.getString("member_pw");
 				String member_name=rs.getString("member_name");

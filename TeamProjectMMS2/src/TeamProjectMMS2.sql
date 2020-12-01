@@ -23,6 +23,7 @@ NOCACHE;
 
 insert into MEMBER_P values (0001, 'm001', 'pw1234','kim','2000-10-20','qwer2@gmail.com')
 insert into MEMBER_P values (2, 'kiskdo032', 'pw1234','lee','2000-11-20','q23er2@gmail.com')
+insert into MEMBER_P values (21, 'kis032', 'pw1234','lee','2000-11-20','q23er2@gmail.com')
 select * from member_P
 select * from member_P where member_birth like '%05%'
 

@@ -9,7 +9,7 @@ public class UpdateCommand implements Command{
 	MemberDAO dao= new MemberDAO();
 	@Override
 	public void execute(Scanner sc) {
-		
+		//1번호,2아이디
 		System.out.println("1.회원번호로 수정  2.회원아이디로 수정");
 		dto = new MemberDTO();
 		int k =sc.nextInt();
@@ -17,10 +17,11 @@ public class UpdateCommand implements Command{
 		if(k==1) {
 			System.out.println("수정할 회원번호를 입력하세요");
 			dto = num(sc);
-		}else {
+		}else{
 			System.out.println("수정할 아이디를 입력하세요");
 			dto = id(sc);
 		}
+			
 		String member_name= member_name(sc);
 				
 		String member_birth = member_birth(sc);
@@ -56,7 +57,7 @@ public class UpdateCommand implements Command{
 	public MemberDTO id(Scanner sc) {
 		MemberDAO dao = new MemberDAO();
 		String member_id= sc.nextLine();
-		MemberDTO dto = dao.selectByid(member_id);
+		MemberDTO dto = dao.selectByEquelId(member_id);
 		if(dto==null) { // 회원id가 없을 때 
 			List<MemberDTO>list = dao.select();
 			for (int i = 0; i < list.size(); i++) {
@@ -67,11 +68,11 @@ public class UpdateCommand implements Command{
 			}
 			System.out.println("회원아이디를 확인하고 수정할 ID를 입력하세요.");
 			member_id= sc.nextLine();
-			sc.nextLine();
-			dto = dao.selectByid(member_id);
+			dto = dao.selectByEquelId(member_id);
 		}
 		return dto;
 	}
+	
 	
 	public String member_name(Scanner sc) {
 		String member_name="";
