@@ -21,6 +21,27 @@ public class MemberDTO implements Serializable{
 	}
 
 
+	public MemberDTO(String member_id, String member_pw, String member_name, String member_email) {
+		super();
+	
+		this.member_id = member_id;
+		this.member_pw = member_pw;
+		this.member_name = member_name;
+		this.member_email = member_email;
+	}
+	
+
+
+	public MemberDTO(String member_id, String member_pw, String member_name, String member_birth, String member_email) {
+		super();
+		this.member_id = member_id;
+		this.member_pw = member_pw;
+		this.member_name = member_name;
+		this.member_birth = member_birth;
+		this.member_email = member_email;
+	}
+
+
 	public MemberDTO(int member_num, String member_id, String member_pw, String member_name, String member_birth,
 			String member_email) {
 		super();
