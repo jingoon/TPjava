@@ -23,7 +23,8 @@ public class DeleteCommand implements Command{
 			sc.nextLine();
 			dao.delete(dao.selectByNum(member_num));
 			break;
-
+		// 이름을 입력해서 삭제(중복이라면 같은 이름 리스트 보여준 후 회원번호로 삭제)
+		
 		}
 
 	}
@@ -33,5 +34,4 @@ public class DeleteCommand implements Command{
 		return "4.삭제 ";
 	}
 	
-
 }

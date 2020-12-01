@@ -88,7 +88,7 @@ public class SelectCommand implements Command{
 	
 	@Override
 	public String toString() {
-		return "2.조회 ";
+		return "2.조회, ";
 	}
 	
 	

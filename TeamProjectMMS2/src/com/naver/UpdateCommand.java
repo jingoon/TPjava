@@ -21,13 +21,12 @@ public class UpdateCommand implements Command{
 			System.out.println("수정할 아이디를 입력하세요");
 			dto = id(sc);
 		}
-			
+		//이름수정
 		String member_name= member_name(sc);
-				
+		//생일수정
 		String member_birth = member_birth(sc);
-		
+		//메일수정
 		String member_email = member_email(sc);
-		
 		dto = new MemberDTO(dto.getMember_num(), dto.getMember_id(), dto.getMember_pw(), member_name, member_birth, member_email);
 		dao.update(dto);
 	
@@ -113,7 +112,7 @@ public class UpdateCommand implements Command{
 	}
 	@Override
 	public String toString() {
-		return "3.수정 ";
+		return "3.수정, ";
 	}
 
 }
