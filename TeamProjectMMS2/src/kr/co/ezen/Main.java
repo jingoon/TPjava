@@ -1,9 +1,11 @@
 package kr.co.ezen;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
+import com.naver.BirthCheck;
 import com.naver.Command;
 import com.naver.DeleteCommand;
 import com.naver.EndCommand;
@@ -24,6 +26,8 @@ public class Main {
 		coms.add(new DeleteCommand());
 		
 		while (true) {
+//			BirthCheck bc= new BirthCheck();
+//			bc.birthCheck("2020-13-32");
 			System.out.println("메뉴를 선택하세요");
 			for (int i = 0; i < coms.size(); i++) {
 				System.out.print(coms.get(i));

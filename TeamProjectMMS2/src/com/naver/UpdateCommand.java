@@ -7,6 +7,7 @@ public class UpdateCommand implements Command{
 	
 	MemberDTO dto=null;	
 	MemberDAO dao= new MemberDAO();
+	BirthCheck bc= new BirthCheck();
 	@Override
 	public void execute(Scanner sc) {
 		//1번호,2아이디
@@ -21,13 +22,12 @@ public class UpdateCommand implements Command{
 			System.out.println("수정할 아이디를 입력하세요");
 			dto = id(sc);
 		}
-			
+		//이름수정
 		String member_name= member_name(sc);
-				
+		//생일수정
 		String member_birth = member_birth(sc);
-		
+		//메일수정
 		String member_email = member_email(sc);
-		
 		dto = new MemberDTO(dto.getMember_num(), dto.getMember_id(), dto.getMember_pw(), member_name, member_birth, member_email);
 		dao.update(dto);
 	
@@ -87,15 +87,18 @@ public class UpdateCommand implements Command{
 	}
 	
 	public String member_birth(Scanner sc) {
-		String member_birth="";
+		String member_birth=dto.getMember_birth();
 		System.out.println("회원번호: "+dto.getMember_num()+" 의 생일을 변경하시겠습니까?( Y , N )");
 		String y = sc.nextLine();
 		if(y.equalsIgnoreCase("y")) {
 			System.out.println("새로운 생일(이전 생일:"+dto.getMember_birth()+")을 입력하세요");
 			member_birth = sc.nextLine();
-		}else {
-			member_birth = dto.getMember_birth();
+			if(!bc.birthCheck(member_birth)) {
+				System.out.println("생일을 잘못 입력하였습니다. 변경이 취소되었습니다");
+				member_birth=dto.getMember_birth();
+			}
 		}
+		
 		return member_birth;
 	}
 	
@@ -113,7 +116,7 @@ public class UpdateCommand implements Command{
 	}
 	@Override
 	public String toString() {
-		return "3.수정 ";
+		return "3.수정, ";
 	}
 
 }
