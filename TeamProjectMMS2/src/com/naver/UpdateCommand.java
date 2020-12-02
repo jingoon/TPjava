@@ -1,6 +1,5 @@
 package com.naver;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,7 +11,7 @@ public class UpdateCommand implements Command{
 	BirthCheck bc= new BirthCheck();
 	@Override
 	public void execute(Scanner sc) {
-		//1번호,2아이디
+		//1번호,2아이디,3이름
 		System.out.println("1.회원번호 입력,  2.ID 입력,  3.이름 입력");
 		dto = new MemberDTO();
 		int k =sc.nextInt();
@@ -131,7 +130,7 @@ public class UpdateCommand implements Command{
 			System.out.println("새로운 생일을 입력하세요");
 			member_birth = sc.nextLine();
 			if(!bc.birthCheck(member_birth)) {
-				System.out.println("생일을 잘못 입력하였습니다. 변경이 취소되었습니다");
+				System.out.println(member_birth+" 생일을 잘못 입력하였습니다. 변경이 취소되었습니다");
 				member_birth=dto.getMember_birth();
 			}
 		}
