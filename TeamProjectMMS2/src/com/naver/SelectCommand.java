@@ -76,7 +76,8 @@ public class SelectCommand implements Command{
 		String name=dto.getMember_name();
 		String birth=dto.getMember_birth();
 		String email=dto.getMember_email();
-		System.out.println("회원번호:"+num+" ID:"+id+" 이름:"+name+" 생년월일:"+birth+" email:"+email);
+		String pw=dto.getMember_pw();
+		System.out.println("회원번호:"+num+" ID:"+id+" 이름:"+name+" 생년월일:"+birth+" email:"+email+" pw:"+pw);
 		
 	}
 	public void print(List<MemberDTO> list) {

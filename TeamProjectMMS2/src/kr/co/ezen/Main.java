@@ -1,10 +1,13 @@
 package kr.co.ezen;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -20,11 +23,11 @@ public class Main {
 			
 		Scanner sc = new Scanner(System.in);
 		
-		//map으로 메뉴
+		//map 메뉴
 		mapMenu(sc);
-		//lset로 메뉴
+		
+		//lset 메뉴
 //		listMenu(sc);
-	
 		
 	}
 	public static void listMenu(Scanner sc) {

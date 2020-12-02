@@ -30,7 +30,7 @@ select * from member_P
 select * from member_P where member_birth like '%05%'
 
 delete from MEMBER_P where member_num = '2'
-
+select max(member_pw) from member_p
 ------------
 - 테이블명 정하기
 - 새로운 컬럼 추가할 것인지?

@@ -1,6 +1,8 @@
 package com.naver;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class UpdateCommand implements Command{
@@ -31,9 +33,26 @@ public class UpdateCommand implements Command{
 		String member_birth = member_birth(sc);
 		//메일수정
 		String member_email = member_email(sc);
-		dto = new MemberDTO(dto.getMember_num(), dto.getMember_id(), dto.getMember_pw(), member_name, member_birth, member_email);
+		//비밀번호 초기화(임시번호발급)
+		String member_pw =pw(sc);
+		
+		dto = new MemberDTO(dto.getMember_num(), dto.getMember_id(), member_pw, member_name, member_birth, member_email);
 		dao.update(dto);
 	
+	}
+	public String pw(Scanner sc) {
+		System.out.println("비밀번호를 초기화(임시비밀번호로 저장) 하시겠습니까( Y , N )");
+		String reSetPW = null;
+		Random rd = new Random(System.currentTimeMillis());
+		String y= sc.nextLine();
+		if(y.equalsIgnoreCase("y")){
+			int num = rd.nextInt();
+			reSetPW="ezen"+num;
+			System.out.println("비밀번호: "+reSetPW+"로 변경되었습니다.");
+			return reSetPW;
+		}else {
+			return dto.getMember_pw();
+		}
 	}
 	
 	public MemberDTO name(Scanner sc) {
