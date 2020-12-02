@@ -16,14 +16,26 @@ public class DeleteCommand implements Command{
 		case 1:
 			System.out.println("아이디를 입력해주세요");
 			String member_id = sc.nextLine();
-			dao.delete(dao.selectByEquelId(member_id));
+			dto=dao.selectByEquelId(member_id);
+			if(dto==null) {
+				System.out.println("삭제 실패: 일치하는 아이디가 없습니다");
+			}else {
+				dao.delete(dto);
+				System.out.println(member_id+"가 삭제되었습니다.");
+			}
 			break;
 
 		case 2:
 			System.out.println("회원번호를 입력해주세요");
 			int member_num = sc.nextInt();
 			sc.nextLine();
-			dao.delete(dao.selectByNum(member_num));
+			dto=dao.selectByNum(member_num);
+			if(dto==null){
+				System.out.println("삭제 실패: 일치하는 회원번호가 없습니다");
+			}else {
+				dao.delete(dto);
+				System.out.println(member_num+"이 삭제되었습니다.");
+			}
 			break;
 		case 3:
 			System.out.println("이름을 입력해주세요");

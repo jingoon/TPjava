@@ -183,7 +183,6 @@ public class MemberDAO {
 		PreparedStatement pstmt =null;
 		ResultSet rs=null;
 		String sql="select * from member_P where member_name like ?";
-		MemberDTO dto =null;
 		try {
 			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
 			pstmt = conn.prepareStatement(sql);
