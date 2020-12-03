@@ -21,11 +21,8 @@ public class Main {
 			
 		Scanner sc = new Scanner(System.in);
 		
-		Command c = new InsertCommand_jin();
-		c.execute(sc);
-		
 		//map 메뉴
-//		mapMenu(sc);
+		mapMenu(sc);
 		
 		//lset 메뉴
 //		listMenu(sc);
@@ -34,10 +31,12 @@ public class Main {
 	public static void listMenu(Scanner sc) {
 		List<Command> coms = new ArrayList<Command>();
 		coms.add(new EndCommand());
-		coms.add(new InsertCommand());
+		coms.add(new InsertCommand_jin());
 		coms.add(new SelectCommand());
 		coms.add(new UpdateCommand());
 		coms.add(new DeleteCommand());
+		
+		
 		
 		while (true) {
 			System.out.println("메뉴를 선택하세요");
