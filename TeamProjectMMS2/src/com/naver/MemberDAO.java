@@ -58,6 +58,26 @@ public class MemberDAO {
 			closeAll(null, pstmt, conn);
 		}
 	}
+	public void insert(int num, String id, String pw, String name, String birth, String email) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "insert into member_P values(?,?,?,?,?,?)";
+		try {
+			conn = DriverManager.getConnection(Command.URL, Command.USER, Command.PASSWORD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2, id);
+			pstmt.setString(3, pw);
+			pstmt.setString(4, name);
+			pstmt.setString(5, birth);
+			pstmt.setString(6, email);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(null, pstmt, conn);
+		}
+	}
 		
 	public void update(MemberDTO dto) {
 		Connection conn = null;
@@ -251,6 +271,27 @@ public class MemberDAO {
 		}
 		
 		return dto;
+	}
+	public int maxNum() {
+		Connection conn = null;
+		PreparedStatement pstmt =null;
+		ResultSet rs=null;
+		int maxNum=2020000;
+		String sql="select max(member_num) as max from member_P";
+		try {
+			conn=DriverManager.getConnection(Command.URL,Command.USER, Command.PASSWORD);
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				maxNum=rs.getInt("max");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			closeAll(rs, pstmt, conn);
+		}
+		return maxNum;
 	}
 	
 	private void closeAll(ResultSet rs, PreparedStatement pstmt, Connection conn) {

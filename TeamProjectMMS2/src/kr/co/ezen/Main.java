@@ -13,6 +13,7 @@ import com.naver.DeleteCommand;
 import com.naver.EndCommand;
 import com.naver.UpdateCommand;
 import com.naver.InsertCommand;
+import com.naver.InsertCommand_jin;
 import com.naver.SelectCommand;
 
 public class Main {
@@ -20,8 +21,11 @@ public class Main {
 			
 		Scanner sc = new Scanner(System.in);
 		
+		Command c = new InsertCommand_jin();
+		c.execute(sc);
+		
 		//map 메뉴
-		mapMenu(sc);
+//		mapMenu(sc);
 		
 		//lset 메뉴
 //		listMenu(sc);
