@@ -18,7 +18,7 @@ public class SelectCommand implements Command{
 		case 1:
 			//전체조회
 			list = dao.select();
-			print(list);
+			dao.print(list);
 			break;
 		case 2:
 			//회원번호조회
@@ -26,11 +26,10 @@ public class SelectCommand implements Command{
 			int member_num=sc.nextInt();
 			sc.nextLine();
 			dto=dao.selectByNum(member_num);
-			
-			try {
-				print(dto);
-			} catch (Exception e) {
-				System.out.println("존재하지 않는 회원번호입니다");
+			if(dto==null) {
+				System.out.println("일치하는 회원번호가 없습니다.");
+			}else {
+				dao.print(dto);
 			}
 			break;
 		case 3:
@@ -38,11 +37,10 @@ public class SelectCommand implements Command{
 			System.out.println("회원아이디를 입력하세요");
 			String member_id=sc.nextLine();
 			list=dao.selectByid(member_id);
-			
-			try {
-				print(list);
-			} catch (Exception e) {
-				System.out.println("존재하지 않는 회원아이디입니다");
+			if(list.size()==0) {
+				System.out.println("일치하는 아이디가 없습니다.");
+			}else {
+				dao.print(list);
 			}
 			break;
 		case 4:
@@ -50,10 +48,10 @@ public class SelectCommand implements Command{
 			System.out.println("회원이름을 입력하세요");
 			String member_name=sc.nextLine();
 			list=dao.selectByName(member_name);
-			try {
-				print(list);
-			} catch (Exception e) {
-				System.out.println("존재하지 않는 회원이름입니다");
+			if(list.size()==0) {
+				System.out.println("일치하는 회원이 없습니다.");
+			}else {
+				dao.print(list);
 			}
 			break;
 		case 5:
@@ -66,24 +64,8 @@ public class SelectCommand implements Command{
 				System.out.println("회원 중 "+member_age+"세 회원은 없습니다");
 				break;
 			}
-			print(list);
+			dao.print(list);
 			break;
-		}
-	}
-	public void print(MemberDTO dto) {
-		int num= dto.getMember_num();
-		String id=dto.getMember_id();
-		String name=dto.getMember_name();
-		String birth=dto.getMember_birth();
-		String email=dto.getMember_email();
-		String pw=dto.getMember_pw();
-		System.out.println("회원번호:"+num+" ID:"+id+" 이름:"+name+" 생년월일:"+birth+" email:"+email+" pw:"+pw);
-		
-	}
-	public void print(List<MemberDTO> list) {
-		for (int i = 0; i < list.size(); i++) {
-			MemberDTO dto= list.get(i);
-			print(dto);
 		}
 	}
 	

@@ -293,5 +293,21 @@ public class MemberDAO {
 		}
 		return dto;
 	}
+	public void print(MemberDTO dto) {
+		int num= dto.getMember_num();
+		String id=dto.getMember_id();
+		String name=dto.getMember_name();
+		String birth=dto.getMember_birth();
+		String email=dto.getMember_email();
+		String pw=dto.getMember_pw();
+		System.out.println("회원번호:"+num+" ID:"+id+" 이름:"+name+" 생년월일:"+birth+" email:"+email+" pw:"+pw);
+		
+	}
+	public void print(List<MemberDTO> list) {
+		for (int i = 0; i < list.size(); i++) {
+			MemberDTO dto= list.get(i);
+			print(dto);
+		}
+	}
 
 }
