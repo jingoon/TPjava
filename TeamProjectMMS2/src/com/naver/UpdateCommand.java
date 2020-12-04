@@ -21,19 +21,22 @@ public class UpdateCommand implements Command{
 		sc.nextLine();
 		switch (menu) {
 		case 3:
-			while(ing) {// 이름일치 목록이 있을 때만 , 미구현
-				List<MemberDTO>list = new ArrayList<MemberDTO>();
+			List<MemberDTO>list = new ArrayList<MemberDTO>();
+			while(ing) {// 이름이 하나만 일치하면 수정으로 없거나 2개 이상이면 목록출력, 반복
+				
 				System.out.print("수정할 회원 이름 검색: ");
 				String member_name=sc.nextLine();
 				list=name(member_name);
 				if(list.size()==1) {
 					dto=list.get(0);
 					ing=false;
-					break;
-				}else {
-					System.out.println("이름을 확인하고 [회원번호]를 입력하세요");
+				}else if(list.size()>1){
+					System.out.println("같은 이름이 있습니다 회원번호를 입력하세요");
 					ing=false;
 				}
+			}
+			if(list.size()==1) {
+				break;
 			}
 		case 1:
 			ing=true;
@@ -55,15 +58,19 @@ public class UpdateCommand implements Command{
 			while(ing) { // id의 일부 입력시 중복이라면 중복정보 출력 후 다시 입력받음
 				System.out.print("수정할 회원 ID 검색: ");
 				String member_id=sc.nextLine();
-				List<MemberDTO>list=id(member_id);
-				if(list.size()==1) {
-					dto=list.get(0);
+				List<MemberDTO>list2=id(member_id);
+				if(list2.size()==1) {
+					dto=list2.get(0);
 					ing=false;
-				}else if(list.size()>1){
+				}else if(list2.size()>1){
 					System.out.println("회원아이디를 확인하고 [회원아이디]를 입력하세요");
+					System.out.print("수정할 회원 ID: ");
 					member_id=sc.nextLine();
 					dto=dao.selectByEquelId(member_id);
-					ing=false;
+					if(dto!=null) {
+						ing=false;
+					}
+					System.out.println("다시 확인하고 입력하세요");
 				}
 			}
 			break;
@@ -168,7 +175,7 @@ public class UpdateCommand implements Command{
 
 	@Override
 	public String toString() {
-		return "3.수정 ";
+		return "수정 ";
 	}
 	
 	

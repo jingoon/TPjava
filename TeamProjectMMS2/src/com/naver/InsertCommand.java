@@ -55,7 +55,7 @@ public class InsertCommand implements Command{
 	}
 	@Override
 	public String toString() {
-		return "1.입력, ";
+		return "입력 ";
 	}
 	
 	

@@ -1,3 +1,14 @@
+create table menu(
+fullname varchar2(100) primary key
+)
+
+insert into menu values ('com.naver.InsertCommand')
+insert into menu values ('com.naver.SelectCommand')
+insert into menu values ('com.naver.UpdateCommand')
+insert into menu values ('com.naver.DeleteCommand')
+insert into menu values ('com.naver.EndCommand')
+insert into menu values ('com.naver.SelectByidCommand')
+
 -------- 
 현재 계정 생성 테이블 조회
  SELECT *FROM tab

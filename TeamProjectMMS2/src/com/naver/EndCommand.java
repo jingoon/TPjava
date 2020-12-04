@@ -13,7 +13,7 @@ public class EndCommand implements Command{
 
 	@Override
 	public String toString() {
-		return "0.종료, ";
+		return "종료 ";
 	}
 	
 

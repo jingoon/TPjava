@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class SelectCommand implements Command{
+public class SelectByidCommand implements Command{
 	
 	@Override
 	public void execute(Scanner sc) {
